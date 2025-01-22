@@ -42,14 +42,19 @@ public static class Arrays
         // be implemented by another person.
 
         int count = data.Count;
-        amount = amount % count; // Ensure we don't rotate more than the size of the list
 
-        // Step 3: Split the list into two parts: the last 'amount' elements and the first 'count - amount' elements
+        // Step 1: Handle cases where amount >= count using modulo
+        amount = amount % count;
+
+        // Step 2: If no rotation is needed, return immediately
+        if (amount == 0) return;
+
+        // Step 3: Split the list into two parts
         List<int> part1 = data.GetRange(count - amount, amount); // Last 'amount' elements
         List<int> part2 = data.GetRange(0, count - amount); // First 'count - amount' elements
 
-        // Step 4: Clear the original list and add the two parts in the new order
-        data.Clear(); // Clear the original list
+        // Step 4: Clear the original list and add parts in the new order
+        data.Clear();
         data.AddRange(part1); // Add the last 'amount' elements
         data.AddRange(part2); // Add the first 'count - amount' elements
     }
